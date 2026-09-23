@@ -16,8 +16,10 @@
   --ink: #17150f;                   /* 墨黑正文 */
   --ink-soft: #5d5a52;              /* 次级文字 */
   --line: rgba(23, 21, 15, 0.16);   /* 发丝分割线 */
-  --blue: #002fa7;                  /* 克莱因蓝强调色 */
+  --blue: #002fa7;                  /* 克莱因蓝品牌色（色块/联系区/页脚） */
+  --accent: #002fa7;                /* 文字与线条强调色（深色主题下提亮） */
   --paper-on-blue: rgba(246, 243, 236, 0.92);
+  --header-bg: rgba(246, 243, 236, 0.92); /* 导航滚动后的毛玻璃底色 */
 
   --serif: Georgia, "Times New Roman", "Noto Serif SC", "Source Han Serif SC",
     "Songti SC", SimSun, serif;
@@ -26,6 +28,19 @@
 
   --header-h: 64px;
   --gutter: clamp(20px, 5vw, 56px);
+
+  color-scheme: light;
+}
+
+/* 深色主题：替换底色/文字/分割线与强调色，克莱因蓝品牌色块保持不变 */
+html[data-theme="dark"] {
+  --paper: #15130e;
+  --ink: #f0ece0;
+  --ink-soft: #a8a294;
+  --line: rgba(240, 236, 224, 0.18);
+  --accent: #7d97ff;
+  --header-bg: rgba(21, 19, 14, 0.86);
+  color-scheme: dark;
 }
 
 /* ---------- 02 基础重置 ---------- */
@@ -46,6 +61,7 @@ body {
   line-height: 1.75;
   color: var(--ink);
   background: var(--paper);
+  transition: background 0.3s ease, color 0.3s ease;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -100,7 +116,7 @@ body.nav-open {
 }
 
 .site-header.is-scrolled {
-  background: rgba(246, 243, 236, 0.92);
+  background: var(--header-bg);
   backdrop-filter: blur(10px);
   box-shadow: 0 1px 0 var(--line);
 }
@@ -129,7 +145,14 @@ body.nav-open {
   font-weight: 500;
   letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: var(--blue);
+  color: var(--accent);
+}
+
+.site-header__right {
+  display: flex;
+  align-items: center;
+  gap: clamp(20px, 3vw, 40px);
+  margin-left: auto;
 }
 
 .site-nav {
@@ -151,7 +174,7 @@ body.nav-open {
   bottom: 0;
   width: 100%;
   height: 2px;
-  background: var(--blue);
+  background: var(--accent);
   transform: scaleX(0);
   transform-origin: right;
   transition: transform 0.3s ease;
@@ -197,6 +220,46 @@ body.nav-open .nav-toggle span:nth-child(2) {
   transform: rotate(-45deg);
 }
 
+/* 主题切换按钮 */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 0;
+  background: none;
+  padding: 4px 0;
+  cursor: pointer;
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink);
+  transition: color 0.3s ease;
+}
+
+.theme-toggle:hover {
+  color: var(--accent);
+}
+
+/* 浅色主题显示月亮（点击切深色），深色主题显示太阳 */
+.theme-toggle__icon--sun,
+.theme-toggle__label--light {
+  display: none;
+}
+
+html[data-theme="dark"] .theme-toggle__icon--moon,
+html[data-theme="dark"] .theme-toggle__label--dark {
+  display: none;
+}
+
+html[data-theme="dark"] .theme-toggle__icon--sun {
+  display: block;
+}
+
+html[data-theme="dark"] .theme-toggle__label--light {
+  display: inline;
+}
+
 /* ---------- 05 封面首屏 ---------- */
 .hero {
   min-height: 100vh;
@@ -218,7 +281,7 @@ body.nav-open .nav-toggle span:nth-child(2) {
 }
 
 .hero__meta span:nth-child(2) {
-  color: var(--blue);
+  color: var(--accent);
   font-weight: 600;
 }
 
@@ -307,7 +370,7 @@ body.nav-open .nav-toggle span:nth-child(2) {
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  color: var(--blue);
+  color: var(--accent);
   font-weight: 600;
 }
 
@@ -315,7 +378,7 @@ body.nav-open .nav-toggle span:nth-child(2) {
   display: block;
   width: 56px;
   height: 1px;
-  background: var(--blue);
+  background: var(--accent);
 }
 
 /* ---------- 06 区块标题 ---------- */
@@ -335,7 +398,7 @@ body.nav-open .nav-toggle span:nth-child(2) {
 
 .section-head__title em {
   font-style: italic;
-  color: var(--blue);
+  color: var(--accent);
 }
 
 .section-head__zh {
@@ -351,7 +414,7 @@ body.nav-open .nav-toggle span:nth-child(2) {
   font-style: italic;
   font-size: clamp(1.8rem, 4.5vw, 3.2rem);
   line-height: 1;
-  color: var(--blue);
+  color: var(--accent);
 }
 
 /* ---------- 07 作品区与目录索引 ---------- */
@@ -389,7 +452,7 @@ body.nav-open .nav-toggle span:nth-child(2) {
   font-family: var(--serif);
   font-style: italic;
   font-size: 0.95rem;
-  color: var(--blue);
+  color: var(--accent);
 }
 
 .toc__name {
@@ -408,7 +471,7 @@ body.nav-open .nav-toggle span:nth-child(2) {
 
 .toc__list a:hover {
   padding-left: 10px;
-  color: var(--blue);
+  color: var(--accent);
 }
 
 /* ---------- 08 项目：A 特稿 / B 对开 / C 紧凑 ---------- */
@@ -439,15 +502,15 @@ body.nav-open .nav-toggle span:nth-child(2) {
   font-family: var(--serif);
   font-style: italic;
   font-size: clamp(1.3rem, 2.2vw, 1.8rem);
-  color: var(--blue);
+  color: var(--accent);
 }
 
 /* 类别标签：项目名称上方的小型描边标签 */
 .project__tag {
   align-self: flex-start;
   margin-bottom: 14px;
-  border: 1px solid var(--blue);
-  color: var(--blue);
+  border: 1px solid var(--accent);
+  color: var(--accent);
   font-size: 0.68rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -538,7 +601,7 @@ body.nav-open .nav-toggle span:nth-child(2) {
 }
 
 .project__meta .sep {
-  color: var(--blue);
+  color: var(--accent);
 }
 
 .project__stack {
@@ -556,7 +619,7 @@ body.nav-open .nav-toggle span:nth-child(2) {
 .project__stack li + li::before {
   content: "/";
   margin: 0 10px;
-  color: var(--blue);
+  color: var(--accent);
 }
 
 /* A 型 · 特稿：通栏大图在左，文字在右 */
@@ -661,7 +724,7 @@ body.nav-open .nav-toggle span:nth-child(2) {
   content: "";
   width: 9px;
   height: 9px;
-  background: var(--blue);
+  background: var(--accent);
 }
 
 .about__subhead + ul {
@@ -680,7 +743,7 @@ body.nav-open .nav-toggle span:nth-child(2) {
   font-family: var(--serif);
   font-style: italic;
   font-size: 0.85rem;
-  color: var(--blue);
+  color: var(--accent);
 }
 
 .about__edu li {
@@ -694,7 +757,7 @@ body.nav-open .nav-toggle span:nth-child(2) {
   font-family: var(--serif);
   font-style: italic;
   font-size: 0.8rem;
-  color: var(--blue);
+  color: var(--accent);
   margin-bottom: 2px;
 }
 
@@ -944,6 +1007,12 @@ a.contact-row:hover .contact-row__arrow {
 /* ≤520px：小屏手机 */
 @media (max-width: 520px) {
   .hero__meta span:nth-child(3) {
+    display: none;
+  }
+
+  /* 小屏只保留主题按钮图标 */
+  .theme-toggle__label,
+  html[data-theme="dark"] .theme-toggle__label {
     display: none;
   }
 

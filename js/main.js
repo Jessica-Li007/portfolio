@@ -2,7 +2,7 @@
    main.js — 页面渲染与交互（原生 JS，无依赖）
    ---------------------------------------------------------
    职责：个人信息绑定 / 渲染目录与项目 / 渲染关于与联系 /
-        导航滚动状态 / 移动端菜单 / 滚动淡入
+        导航滚动状态 / 移动端菜单 / 滚动淡入 / 深浅色主题切换
    ========================================================= */
 
 (function () {
@@ -128,7 +128,26 @@
     );
   }
 
-  /* ---------- 6. 滚动淡入 ---------- */
+  /* ---------- 6. 深浅色主题（初始状态由 index.html 内联脚本提前设置） ---------- */
+  function initTheme() {
+    const btn = $("#theme-toggle");
+    const root = document.documentElement;
+
+    btn.addEventListener("click", () => {
+      const next = root.dataset.theme === "dark" ? "light" : "dark";
+      if (next === "dark") {
+        root.dataset.theme = "dark";
+      } else {
+        delete root.dataset.theme;
+      }
+      /* 记住选择；隐私模式下 localStorage 可能不可用，忽略即可 */
+      try {
+        localStorage.setItem("theme", next);
+      } catch (e) {}
+    });
+  }
+
+  /* ---------- 7. 滚动淡入 ---------- */
   function initReveal() {
     const items = $$(".reveal");
     if (!("IntersectionObserver" in window)) {
@@ -156,6 +175,7 @@
     renderContacts();
     $("#year").textContent = new Date().getFullYear();
     initHeader();
+    initTheme();
     initReveal();
   }
 
