@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200" viewBox="0 0 900 1200">
+  <rect width="900" height="1200" fill="#F6F3EC"/>
+  <g stroke="#17150F" stroke-opacity="0.08" stroke-width="1">
+    <path d="M0 240H900M0 480H900M0 720H900M0 960H900M180 0V1200M360 0V1200M540 0V1200M720 0V1200"/>
+  </g>
+  <rect x="60" y="120" width="260" height="200" fill="#002FA7"/>
+  <path d="M120 220 L158 258 L232 178" fill="none" stroke="#F6F3EC" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="340" y="200" width="420" height="820" rx="40" fill="none" stroke="#17150F" stroke-width="4"/>
+  <line x1="480" y1="236" x2="620" y2="236" stroke="#17150F" stroke-width="4" stroke-linecap="round"/>
+  <g stroke="#17150F" stroke-width="3" fill="#EDE9DE">
+    <rect x="375" y="300" width="350" height="100"/>
+    <rect x="375" y="430" width="350" height="100"/>
+    <rect x="375" y="560" width="350" height="100"/>
+  </g>
+  <rect x="400" y="330" width="40" height="40" fill="#002FA7"/>
+  <path d="M408 350 L420 362 L438 337" fill="none" stroke="#F6F3EC" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="400" y="460" width="40" height="40" fill="#002FA7"/>
+  <path d="M408 480 L420 492 L438 467" fill="none" stroke="#F6F3EC" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="400" y="590" width="40" height="40" fill="none" stroke="#17150F" stroke-width="3"/>
+  <g stroke="#17150F" stroke-width="3" stroke-linecap="round">
+    <line x1="460" y1="342" x2="690" y2="342"/>
+    <line x1="460" y1="368" x2="600" y2="368"/>
+    <line x1="460" y1="472" x2="690" y2="472"/>
+    <line x1="460" y1="498" x2="600" y2="498"/>
+    <line x1="460" y1="602" x2="690" y2="602"/>
+    <line x1="460" y1="628" x2="600" y2="628"/>
+  </g>
+  <line x1="375" y1="760" x2="725" y2="760" stroke="#17150F" stroke-width="3" stroke-opacity="0.25" stroke-linecap="round"/>
+  <line x1="375" y1="760" x2="620" y2="760" stroke="#002FA7" stroke-width="9" stroke-linecap="round"/>
+  <line x1="375" y1="820" x2="560" y2="820" stroke="#17150F" stroke-width="3" stroke-opacity="0.5" stroke-linecap="round"/>
+  <text x="80" y="1060" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-size="190" fill="#002FA7">02</text>
+  <text x="80" y="1120" font-family="Arial, sans-serif" font-size="32" letter-spacing="14" fill="#17150F">TASK TRACKER</text>
+  <text x="80" y="1160" font-family="Arial, sans-serif" font-size="19" letter-spacing="6" fill="#5D5A52">学习任务管理小程序</text>
+</svg>

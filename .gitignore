@@ -1,0 +1,12 @@
+# 操作系统临时文件
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# 日志与临时文件
+*.log
+*.tmp
+
+# IDE 本地缓存（保留 .trae/rules 下的项目规则）
+.trae/*
+!.trae/rules/

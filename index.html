@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>婕妤 · 个人作品集</title>
+  <meta name="description" content="婕妤的个人作品集：软件工程 · 前端开发与交互设计作品展示。" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body id="top">
+
+  <!-- ======================= 顶部导航 ======================= -->
+  <header class="site-header" id="site-header">
+    <div class="site-header__inner container">
+      <a class="site-header__logo" href="#top">
+        <span data-profile="name">婕妤</span>
+        <span class="site-header__logo-en">Portfolio</span>
+      </a>
+      <nav class="site-nav" id="site-nav" aria-label="主导航">
+        <a class="site-nav__link" href="#works">作品</a>
+        <a class="site-nav__link" href="#about">关于</a>
+        <a class="site-nav__link" href="#contact">联系</a>
+      </nav>
+      <button class="nav-toggle" id="nav-toggle" aria-label="打开菜单" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ======================= 封面首屏 ======================= -->
+    <section class="hero container" id="hero" aria-label="封面">
+      <div class="hero__meta">
+        <span>Portfolio · 个人作品集</span>
+        <span>Vol.01 — 2026</span>
+        <span data-profile="role">软件工程 · 前端开发 / 交互设计</span>
+      </div>
+
+      <div class="hero__stage">
+        <img class="hero__photo" src="assets/images/avatar.jpg" alt="婕妤的个人照片" />
+        <p class="hero__kicker">Hello, I'm</p>
+        <h1 class="hero__title">
+          <span class="hero__title-zh" data-profile="name">婕妤</span>
+          <span class="hero__title-en" data-profile="nameEn">JIEYU</span>
+        </h1>
+        <p class="hero__sub" data-profile="intro"></p>
+      </div>
+
+      <div class="hero__foot">
+        <a class="hero__scroll" href="#works"><span>Scroll</span><i aria-hidden="true"></i></a>
+        <span>Contents · 目录</span>
+      </div>
+    </section>
+
+    <!-- ======================= 作品 ======================= -->
+    <section class="works" id="works">
+      <div class="container">
+        <header class="section-head reveal">
+          <div>
+            <h2 class="section-head__title">Selected <em>Works</em></h2>
+            <p class="section-head__zh">作品 · 精选项目</p>
+          </div>
+          <span class="section-head__count" id="works-count">(04)</span>
+        </header>
+
+        <!-- 目录索引：点击可跳转到对应项目 -->
+        <div class="toc reveal">
+          <p class="toc__label">Contents · 目录</p>
+          <ol class="toc__list" id="toc-list"></ol>
+        </div>
+
+        <!-- 项目列表：由 js/main.js 依据 js/data.js 渲染 -->
+        <div class="projects" id="project-list"></div>
+      </div>
+    </section>
+
+    <!-- ======================= 关于我 ======================= -->
+    <section class="about" id="about">
+      <div class="container about__grid">
+        <header class="about__head reveal">
+          <h2 class="section-head__title">About <em>Me</em></h2>
+          <p class="section-head__zh">关于我 · 技能方向</p>
+        </header>
+
+        <div class="about__body reveal">
+          <p class="about__lead" id="about-lead"></p>
+          <div class="about__cols" id="about-cols"></div>
+        </div>
+
+        <aside class="about__side reveal">
+          <h3 class="about__subhead">Skills · 技能方向</h3>
+          <ul class="about__skills" id="about-skills"></ul>
+          <h3 class="about__subhead">Education · 教育背景</h3>
+          <ul class="about__edu" id="about-edu"></ul>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ======================= 联系方式（封底） ======================= -->
+    <section class="contact" id="contact">
+      <div class="container">
+        <p class="contact__kicker reveal">Get in touch · 联系方式</p>
+        <h2 class="contact__title reveal">让我们聊聊，<br /><em>Let's Talk.</em></h2>
+        <div class="contact__rows reveal" id="contact-rows"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ======================= 页脚 ======================= -->
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <p>© <span id="year">2026</span> <span data-profile="name">婕妤</span> · 原生 HTML / CSS / JS 构建</p>
+      <a href="#top">回到顶部 ↑</a>
+    </div>
+  </footer>
+
+  <noscript>
+    <p style="text-align:center;padding:16px;font-family:sans-serif">当前浏览器已禁用 JavaScript，项目列表无法加载。</p>
+  </noscript>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

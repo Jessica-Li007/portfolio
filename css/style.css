@@ -1,0 +1,958 @@
+/* =========================================================
+   个人作品集 · 杂志式排版样式
+   原生 CSS，无框架依赖
+   ---------------------------------------------------------
+   目录：
+   01 设计变量    02 基础重置    03 通用布局
+   04 顶部导航    05 封面首屏    06 区块标题
+   07 目录索引    08 项目（A/B/C 三种模板）
+   09 关于我      10 联系方式    11 页脚
+   12 动效        13 响应式
+   ========================================================= */
+
+/* ---------- 01 设计变量 ---------- */
+:root {
+  --paper: #f6f3ec;                 /* 米白纸感底色 */
+  --ink: #17150f;                   /* 墨黑正文 */
+  --ink-soft: #5d5a52;              /* 次级文字 */
+  --line: rgba(23, 21, 15, 0.16);   /* 发丝分割线 */
+  --blue: #002fa7;                  /* 克莱因蓝强调色 */
+  --paper-on-blue: rgba(246, 243, 236, 0.92);
+
+  --serif: Georgia, "Times New Roman", "Noto Serif SC", "Source Han Serif SC",
+    "Songti SC", SimSun, serif;
+  --sans: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Microsoft YaHei",
+    "Noto Sans SC", sans-serif;
+
+  --header-h: 64px;
+  --gutter: clamp(20px, 5vw, 56px);
+}
+
+/* ---------- 02 基础重置 ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, p, ul, ol, figure {
+  margin: 0;
+  padding: 0;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+::selection {
+  background: var(--blue);
+  color: #fff;
+}
+
+/* 锚点跳转时为固定导航留出空间 */
+[id] {
+  scroll-margin-top: calc(var(--header-h) + 16px);
+}
+
+body.nav-open {
+  overflow: hidden;
+}
+
+/* ---------- 03 通用布局 ---------- */
+.container {
+  max-width: 1320px;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* ---------- 04 顶部导航 ---------- */
+.site-header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 50;
+  height: var(--header-h);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.site-header.is-scrolled {
+  background: rgba(246, 243, 236, 0.92);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 1px 0 var(--line);
+}
+
+.site-header__inner {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.site-header__logo {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: 0.06em;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.site-header__logo-en {
+  font-family: var(--sans);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--blue);
+}
+
+.site-nav {
+  display: flex;
+  gap: clamp(20px, 3vw, 40px);
+}
+
+.site-nav__link {
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  position: relative;
+  padding: 4px 0;
+}
+
+.site-nav__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--blue);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+.site-nav__link:hover::after,
+.site-nav__link:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* 汉堡按钮（仅移动端显示） */
+.nav-toggle {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  position: relative;
+  z-index: 60;
+}
+
+.nav-toggle span {
+  position: absolute;
+  left: 8px;
+  width: 24px;
+  height: 2px;
+  background: var(--ink);
+  transition: transform 0.3s ease, top 0.3s ease;
+}
+
+.nav-toggle span:nth-child(1) { top: 15px; }
+.nav-toggle span:nth-child(2) { top: 23px; }
+
+body.nav-open .nav-toggle span:nth-child(1) {
+  top: 19px;
+  transform: rotate(45deg);
+}
+
+body.nav-open .nav-toggle span:nth-child(2) {
+  top: 19px;
+  transform: rotate(-45deg);
+}
+
+/* ---------- 05 封面首屏 ---------- */
+.hero {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  padding-top: calc(var(--header-h) + 18px);
+}
+
+.hero__meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--ink);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.hero__meta span:nth-child(2) {
+  color: var(--blue);
+  font-weight: 600;
+}
+
+.hero__stage {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(40px, 8vh, 88px) 0;
+}
+
+/* 首屏个人照片：沿用原蓝色色块的定位与尺寸 */
+.hero__photo {
+  position: absolute;
+  z-index: 0;
+  top: clamp(30px, 9vh, 90px);
+  right: clamp(8px, 10vw, 150px);
+  width: clamp(110px, 18vw, 250px);
+  height: clamp(150px, 26vw, 360px);
+  display: block;
+  object-fit: cover;
+  object-position: center;
+}
+
+.hero__kicker {
+  position: relative;
+  z-index: 1;
+  font-size: 0.8rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: clamp(12px, 2vh, 24px);
+}
+
+.hero__title {
+  position: relative;
+  z-index: 1;
+  font-family: var(--serif);
+  line-height: 1.02;
+  font-weight: 700;
+}
+
+.hero__title-zh {
+  display: block;
+  font-size: clamp(4.2rem, 13vw, 10.5rem);
+  letter-spacing: 0.05em;
+}
+
+.hero__title-en {
+  display: block;
+  margin-top: clamp(10px, 2vh, 22px);
+  font-size: clamp(1rem, 2.4vw, 1.7rem);
+  letter-spacing: 0.34em;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--ink);
+}
+
+@supports not (-webkit-text-stroke: 1px black) {
+  .hero__title-en {
+    color: var(--ink);
+  }
+}
+
+.hero__sub {
+  position: relative;
+  z-index: 1;
+  margin-top: clamp(22px, 4vh, 40px);
+  max-width: 36em;
+  color: var(--ink-soft);
+  font-size: clamp(0.95rem, 1.4vw, 1.08rem);
+}
+
+.hero__foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0 22px;
+  border-top: 1px solid var(--line);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.hero__scroll {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--blue);
+  font-weight: 600;
+}
+
+.hero__scroll i {
+  display: block;
+  width: 56px;
+  height: 1px;
+  background: var(--blue);
+}
+
+/* ---------- 06 区块标题 ---------- */
+.section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.section-head__title {
+  font-family: var(--serif);
+  font-size: clamp(2.6rem, 7vw, 5.2rem);
+  line-height: 1.05;
+  font-weight: 700;
+}
+
+.section-head__title em {
+  font-style: italic;
+  color: var(--blue);
+}
+
+.section-head__zh {
+  margin-top: 10px;
+  font-size: 0.8rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.section-head__count {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.8rem, 4.5vw, 3.2rem);
+  line-height: 1;
+  color: var(--blue);
+}
+
+/* ---------- 07 作品区与目录索引 ---------- */
+.works {
+  border-top: 2px solid var(--ink);
+  padding: clamp(72px, 12vh, 130px) 0 clamp(48px, 8vh, 96px);
+}
+
+.toc {
+  margin-top: clamp(36px, 6vh, 64px);
+}
+
+.toc__label {
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 8px;
+}
+
+.toc__list li {
+  border-bottom: 1px solid var(--line);
+}
+
+.toc__list a {
+  display: grid;
+  grid-template-columns: 3.2rem 1fr auto auto;
+  align-items: baseline;
+  gap: 16px;
+  padding: 14px 0;
+  transition: padding-left 0.25s ease, color 0.25s ease;
+}
+
+.toc__no {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--blue);
+}
+
+.toc__name {
+  font-family: var(--serif);
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  font-weight: 600;
+}
+
+.toc__cat,
+.toc__date {
+  font-size: 0.74rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.toc__list a:hover {
+  padding-left: 10px;
+  color: var(--blue);
+}
+
+/* ---------- 08 项目：A 特稿 / B 对开 / C 紧凑 ---------- */
+.projects {
+  margin-top: clamp(48px, 8vh, 88px);
+}
+
+.project {
+  border-top: 2px solid var(--ink);
+  padding-top: 18px;
+  margin-top: clamp(56px, 10vh, 110px);
+}
+
+.project:first-child {
+  margin-top: 0;
+}
+
+/* 编号 + 发丝分割线 */
+.project__meta-top {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+.project__no {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.3rem, 2.2vw, 1.8rem);
+  color: var(--blue);
+}
+
+/* 类别标签：项目名称上方的小型描边标签 */
+.project__tag {
+  align-self: flex-start;
+  margin-bottom: 14px;
+  border: 1px solid var(--blue);
+  color: var(--blue);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+}
+
+.project__en {
+  margin-left: auto;
+  font-size: 0.68rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  text-align: right;
+  color: var(--ink-soft);
+}
+
+.project__layout {
+  display: grid;
+  gap: clamp(24px, 4vw, 56px);
+  margin-top: clamp(24px, 4vh, 44px);
+}
+
+.project__media {
+  grid-area: media;
+  position: relative;
+}
+
+/* 图片后方的克莱因蓝色块：贯穿全站的局部色块元素 */
+.project__media::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  right: -14px;
+  bottom: -14px;
+  width: 58%;
+  height: 58%;
+  background: var(--blue);
+}
+
+.project__frame {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.project__frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;        /* 完整展示配图，不裁切不遮挡 */
+  background: var(--paper);   /* 留白与页面纸感底色同色，视觉无缝 */
+  transition: transform 0.6s ease;
+}
+
+.project__media:hover .project__frame img {
+  transform: scale(1.03);
+}
+
+.project__content {
+  grid-area: content;
+  display: flex;
+  flex-direction: column;
+}
+
+.project__title {
+  font-family: var(--serif);
+  font-size: clamp(1.8rem, 3.4vw, 2.9rem);
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.project__intro {
+  margin-top: 14px;
+  max-width: 34em;
+  color: var(--ink-soft);
+  font-size: clamp(1rem, 1.4vw, 1.16rem);
+  line-height: 1.85;
+}
+
+.project__meta {
+  margin-top: auto;
+  padding-top: 22px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 0.74rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.project__meta .sep {
+  color: var(--blue);
+}
+
+.project__stack {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 0.84rem;
+}
+
+.project__stack li {
+  display: flex;
+  align-items: center;
+}
+
+.project__stack li + li::before {
+  content: "/";
+  margin: 0 10px;
+  color: var(--blue);
+}
+
+/* A 型 · 特稿：通栏大图在左，文字在右 */
+.project--a .project__layout {
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  grid-template-areas: "media content";
+}
+
+.project--a .project__frame {
+  aspect-ratio: 3 / 2;
+}
+
+/* B 型 · 对开：文字在左，竖图在右并向上错位 */
+.project--b .project__layout {
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  grid-template-areas: "content media";
+  align-items: end;
+}
+
+.project--b .project__media {
+  margin-top: clamp(-64px, -5vw, -20px);
+}
+
+.project--b .project__frame {
+  aspect-ratio: 3 / 4;
+}
+
+.project--b .project__content {
+  padding-top: clamp(8px, 3vh, 32px);
+}
+
+/* C 型 · 紧凑：窄幅小图，整体右移留白 */
+.project--c .project__layout {
+  grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+  grid-template-areas: "media content";
+  width: 88%;
+  margin-left: auto;
+}
+
+.project--c .project__frame {
+  aspect-ratio: 4 / 3;
+}
+
+.project--c .project__title {
+  font-size: clamp(1.5rem, 2.6vw, 2.2rem);
+}
+
+/* ---------- 09 关于我 ---------- */
+.about {
+  border-top: 2px solid var(--ink);
+  padding: clamp(72px, 12vh, 130px) 0;
+}
+
+.about__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+  gap: clamp(32px, 5vw, 80px);
+}
+
+.about__head { grid-area: 1 / 1; }
+.about__body { grid-area: 2 / 1; }
+.about__side { grid-area: 1 / 2 / 3 / 3; }
+
+.about__lead {
+  font-family: var(--serif);
+  font-size: clamp(1.3rem, 2.3vw, 1.9rem);
+  line-height: 1.65;
+  font-weight: 600;
+}
+
+/* 正文双栏 + 栏间细线，杂志正文排版 */
+.about__cols {
+  margin-top: clamp(20px, 3vh, 36px);
+  column-count: 2;
+  column-gap: clamp(28px, 4vw, 56px);
+  column-rule: 1px solid var(--line);
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+
+.about__cols p {
+  break-inside: avoid;
+  margin-bottom: 1em;
+}
+
+.about__side {
+  border-left: 1px solid var(--line);
+  padding-left: clamp(24px, 3vw, 48px);
+}
+
+.about__subhead {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.78rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.about__subhead::before {
+  content: "";
+  width: 9px;
+  height: 9px;
+  background: var(--blue);
+}
+
+.about__subhead + ul {
+  margin-bottom: clamp(32px, 5vh, 52px);
+}
+
+.about__skills li {
+  display: grid;
+  grid-template-columns: 2.2rem 1fr;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.95rem;
+}
+
+.about__skills li i {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--blue);
+}
+
+.about__edu li {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.92rem;
+}
+
+.about__edu .time {
+  display: block;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.8rem;
+  color: var(--blue);
+  margin-bottom: 2px;
+}
+
+/* ---------- 10 联系方式（封底：整版克莱因蓝） ---------- */
+.contact {
+  background: var(--blue);
+  color: var(--paper-on-blue);
+  padding: clamp(80px, 14vh, 150px) 0 clamp(64px, 10vh, 110px);
+}
+
+.contact__kicker {
+  font-size: 0.78rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.contact__title {
+  margin-top: 18px;
+  font-family: var(--serif);
+  font-size: clamp(2.8rem, 8vw, 6.5rem);
+  line-height: 1.08;
+  font-weight: 700;
+}
+
+.contact__title em {
+  font-style: italic;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--paper-on-blue);
+}
+
+@supports not (-webkit-text-stroke: 1px black) {
+  .contact__title em {
+    color: var(--paper);
+  }
+}
+
+.contact__rows {
+  margin-top: clamp(40px, 7vh, 72px);
+}
+
+.contact-row {
+  display: grid;
+  grid-template-columns: minmax(0, 220px) 1fr auto;
+  align-items: baseline;
+  gap: 18px;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(246, 243, 236, 0.28);
+}
+
+.contact-row:first-child {
+  border-top: 1px solid rgba(246, 243, 236, 0.28);
+}
+
+.contact-row__label {
+  font-size: 0.72rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+}
+
+.contact-row__value {
+  font-family: var(--serif);
+  font-size: clamp(1.25rem, 2.8vw, 2.1rem);
+  word-break: break-all;
+}
+
+.contact-row__arrow {
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  transition: transform 0.3s ease;
+}
+
+a.contact-row:hover .contact-row__value {
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+a.contact-row:hover .contact-row__arrow {
+  transform: translateX(8px);
+}
+
+/* ---------- 11 页脚 ---------- */
+.site-footer {
+  background: var(--blue);
+  color: rgba(246, 243, 236, 0.75);
+  border-top: 1px solid rgba(246, 243, 236, 0.28);
+}
+
+.site-footer__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  padding-block: 22px;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+}
+
+.site-footer a:hover {
+  color: #fff;
+}
+
+/* ---------- 12 动效 ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .project__frame img {
+    transition: none;
+  }
+}
+
+/* ---------- 13 响应式 ---------- */
+
+/* ≤1024px：平板 / 小屏笔记本 */
+@media (max-width: 1024px) {
+  .about__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about__head,
+  .about__body,
+  .about__side {
+    grid-area: auto;
+  }
+
+  .about__side {
+    border-left: 0;
+    padding-left: 0;
+    border-top: 1px solid var(--line);
+    padding-top: 32px;
+  }
+
+  .project--b .project__media {
+    margin-top: 0;
+  }
+}
+
+/* ≤768px：手机，全部项目退化为单列 */
+@media (max-width: 768px) {
+  .nav-toggle {
+    display: block;
+  }
+
+  .site-nav {
+    position: fixed;
+    top: var(--header-h);
+    left: 0;
+    right: 0;
+    z-index: 55;
+    background: var(--paper);
+    flex-direction: column;
+    gap: 0;
+    padding: 8px var(--gutter) 28px;
+    border-bottom: 1px solid var(--line);
+    transform: translateY(-12px);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s;
+  }
+
+  body.nav-open .site-nav {
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .site-nav__link {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .site-nav__link::after {
+    display: none;
+  }
+
+  .hero__photo {
+    right: 4%;
+    top: 16%;
+    width: clamp(90px, 24vw, 140px);
+    height: clamp(130px, 34vw, 200px);
+  }
+
+  .hero__title-en {
+    letter-spacing: 0.22em;
+  }
+
+  .project--a .project__layout,
+  .project--b .project__layout,
+  .project--c .project__layout {
+    grid-template-columns: 1fr;
+    grid-template-areas: "media" "content";
+    width: 100%;
+  }
+
+  .project__media::before {
+    right: -8px;
+    bottom: -8px;
+  }
+
+  /* 竖版长图在手机上改为横版比例，避免占屏过高 */
+  .project--b .project__frame {
+    aspect-ratio: 4 / 3;
+  }
+
+  .toc__list a {
+    grid-template-columns: 2.4rem 1fr auto;
+  }
+
+  .toc__date {
+    display: none;
+  }
+
+  .about__cols {
+    column-count: 1;
+  }
+
+  .contact-row {
+    grid-template-columns: 1fr auto;
+  }
+
+  .contact-row__label {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ≤520px：小屏手机 */
+@media (max-width: 520px) {
+  .hero__meta span:nth-child(3) {
+    display: none;
+  }
+
+  .section-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .project__meta-top {
+    flex-wrap: wrap;
+  }
+}

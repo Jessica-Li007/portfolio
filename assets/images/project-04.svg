@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <rect width="1200" height="800" fill="#F6F3EC"/>
+  <g stroke="#17150F" stroke-opacity="0.08" stroke-width="1">
+    <path d="M0 200H1200M0 400H1200M0 600H1200M300 0V800M600 0V800M900 0V800"/>
+  </g>
+  <rect x="860" y="100" width="240" height="240" fill="#002FA7"/>
+  <text x="920" y="280" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-size="160" fill="#F6F3EC">A</text>
+  <rect x="420" y="120" width="400" height="70" fill="#002FA7"/>
+  <rect x="420" y="120" width="400" height="460" fill="none" stroke="#17150F" stroke-width="3"/>
+  <g stroke="#17150F" stroke-width="3">
+    <line x1="420" y1="190" x2="820" y2="190"/>
+    <line x1="420" y1="290" x2="820" y2="290"/>
+    <line x1="420" y1="390" x2="820" y2="390"/>
+    <line x1="420" y1="490" x2="820" y2="490"/>
+    <line x1="660" y1="120" x2="660" y2="580"/>
+  </g>
+  <g stroke="#17150F" stroke-width="3" stroke-linecap="round" opacity="0.8">
+    <line x1="450" y1="245" x2="600" y2="245"/>
+    <line x1="450" y1="345" x2="580" y2="345"/>
+    <line x1="450" y1="445" x2="610" y2="445"/>
+    <line x1="450" y1="545" x2="570" y2="545"/>
+  </g>
+  <g stroke="#002FA7" stroke-width="4" stroke-linecap="round">
+    <line x1="695" y1="245" x2="775" y2="245"/>
+    <line x1="695" y1="345" x2="760" y2="345"/>
+    <line x1="695" y1="445" x2="785" y2="445"/>
+    <line x1="695" y1="545" x2="750" y2="545"/>
+  </g>
+  <text x="150" y="640" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-size="150" fill="#002FA7">04</text>
+  <text x="150" y="700" font-family="Arial, sans-serif" font-size="30" letter-spacing="14" fill="#17150F">SCORE SYSTEM</text>
+  <text x="150" y="740" font-family="Arial, sans-serif" font-size="18" letter-spacing="6" fill="#5D5A52">学生成绩管理系统</text>
+</svg>

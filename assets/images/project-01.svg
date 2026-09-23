@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <rect width="1200" height="800" fill="#F6F3EC"/>
+  <g stroke="#17150F" stroke-opacity="0.08" stroke-width="1">
+    <path d="M0 200H1200M0 400H1200M0 600H1200M240 0V800M480 0V800M720 0V800M960 0V800"/>
+  </g>
+  <rect x="180" y="470" width="260" height="200" fill="#002FA7"/>
+  <rect x="690" y="90" width="330" height="620" rx="36" fill="none" stroke="#17150F" stroke-width="4"/>
+  <line x1="800" y1="122" x2="910" y2="122" stroke="#17150F" stroke-width="4" stroke-linecap="round"/>
+  <g stroke="#17150F" stroke-width="3" fill="#EDE9DE">
+    <rect x="720" y="160" width="270" height="150"/>
+    <rect x="720" y="330" width="270" height="150"/>
+    <rect x="720" y="500" width="270" height="150" fill="#002FA7"/>
+  </g>
+  <g stroke="#17150F" stroke-width="3" stroke-linecap="round">
+    <line x1="745" y1="200" x2="880" y2="200"/>
+    <line x1="745" y1="235" x2="845" y2="235"/>
+    <line x1="745" y1="370" x2="880" y2="370"/>
+    <line x1="745" y1="405" x2="845" y2="405"/>
+  </g>
+  <text x="745" y="575" font-family="Georgia, serif" font-style="italic" font-size="54" fill="#F6F3EC">¥</text>
+  <line x1="800" y1="560" x2="900" y2="560" stroke="#F6F3EC" stroke-width="3" stroke-linecap="round"/>
+  <line x1="800" y1="590" x2="860" y2="590" stroke="#F6F3EC" stroke-width="3" stroke-linecap="round" stroke-opacity="0.7"/>
+  <path d="M110 180 L290 180 L330 220 L290 260 L110 260 Z" fill="#002FA7"/>
+  <text x="152" y="232" font-family="Arial, sans-serif" font-size="32" fill="#F6F3EC">TRADE</text>
+  <text x="150" y="600" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-size="150" fill="#002FA7">01</text>
+  <text x="150" y="660" font-family="Arial, sans-serif" font-size="30" letter-spacing="14" fill="#17150F">CAMPUS TRADE</text>
+  <text x="150" y="700" font-family="Arial, sans-serif" font-size="18" letter-spacing="6" fill="#5D5A52">校园二手交易平台</text>
+</svg>
